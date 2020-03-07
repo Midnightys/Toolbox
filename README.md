@@ -1,22 +1,24 @@
 # Android Toolbox by Midnightys
 
-##### How to implement it
+[![](https://jitpack.io/v/Midnightys/Toolbox.svg)](https://jitpack.io/#Midnightys/Toolbox)
 
-```css
-	allprojects {
-		repositories {
-			...
-			maven { url "https://jitpack.io" }
-		}
-	}
+### How to implement it
+
+```groovy
+allprojects {
+  repositories {
+    ...
+    maven { url "https://jitpack.io" }
+  }
+}
 ```
 
-```css
+```groovy
 dependencies {
   implementation "com.github.Midnightys.Toolbox:common:$toolbox_version"
   implementation "com.github.Midnightys.Toolbox:status:$toolbox_version"
   implementation "com.github.Midnightys.Toolbox:firestore-flow:$toolbox_version"
- 	implementation "com.github.Midnightys.Toolbox:use-case:$toolbox_version"
-	}
+  implementation "com.github.Midnightys.Toolbox:use-case:$toolbox_version"
+}
 ```
 
