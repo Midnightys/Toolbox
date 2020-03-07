@@ -3,7 +3,8 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'com.github.dcendents.android-maven'
 
-group "com.midnightys.toolbox.common"
+group "com.midnightys.toolbox"
+
 
 android {
     compileSdkVersion 29
