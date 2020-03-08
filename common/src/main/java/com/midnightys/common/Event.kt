@@ -3,6 +3,7 @@ package com.midnightys.common
 import androidx.annotation.MainThread
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collect
@@ -64,4 +65,10 @@ fun <T> Flow<Event<T>>.event(handle: Boolean = true): Flow<T> =
             if (handle) value.getContentIfNotHandled()?.let { emit(it) }
             else value.peekContent()?.let { emit(it) }
         }
+    }
+
+inline var <T> MutableLiveData<Event<T>>.event
+    get() = value?.peekContent()
+    set(value) {
+        if (value != null) setValue(Event(value))
     }
