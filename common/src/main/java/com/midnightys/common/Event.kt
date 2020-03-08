@@ -8,6 +8,7 @@ import androidx.lifecycle.Observer
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.onEach
 
 /**
  * Used as a wrapper for data that is exposed via a LiveData that represents an event.
@@ -59,15 +60,15 @@ inline fun <T> LiveData<Event<T>>.eventObserve(
     return wrappedObserver
 }
 
-fun <T> Flow<Event<T>>.event(handle: Boolean = true): Flow<T> =
+fun <T> Flow<Event<T>>.onEachEvent(handle: Boolean = true, action: suspend (T) -> Unit): Flow<T> =
     flow {
         collect { value ->
             if (handle) value.getContentIfNotHandled()?.let { emit(it) }
             else value.peekContent()?.let { emit(it) }
         }
-    }
+    }.onEach(action)
 
-inline var <T> MutableLiveData<Event<T>>.event
+inline var <T> MutableLiveData<Event<T>>.eventValue
     get() = value?.peekContent()
     set(value) {
         if (value != null) setValue(Event(value))
