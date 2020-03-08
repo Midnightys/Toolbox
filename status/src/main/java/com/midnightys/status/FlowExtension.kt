@@ -53,3 +53,9 @@ suspend fun <T> Flow<Status<T>>.successSingle(): T {
     @Suppress("UNCHECKED_CAST")
     return result as T
 }
+
+inline fun <T, R> Flow<Status<T>>.ignoreLoading() = flow {
+    collect {
+        if (it !is Loading) emit(it)
+    }
+}
