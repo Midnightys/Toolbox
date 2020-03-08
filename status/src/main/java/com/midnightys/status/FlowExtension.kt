@@ -54,7 +54,7 @@ suspend fun <T> Flow<Status<T>>.successSingle(): T {
     return result as T
 }
 
-inline fun <T, R> Flow<Status<T>>.ignoreLoading() = flow {
+fun Flow<Status<*>>.ignoreLoading() = flow {
     collect {
         if (it !is Loading) emit(it)
     }
